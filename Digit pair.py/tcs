@@ -1,0 +1,50 @@
+def large(n):
+    n=str(n)
+    i=9
+    while(i>=0):
+        if str(i) in n:
+            return i
+        i-=1
+def small(n):
+    n=str(n)
+    i=0
+    while(i<=9):
+        if str(i) in n:
+            return i
+        i+=1
+def pair(n):
+    if n>=3:
+        return 2
+    if n==2:
+        return 1
+    return 0
+
+t=int(input())
+
+k=list(map(int,input().split()))
+bit=[]
+for i in k:
+    l=large(i)
+    s=small(i)
+    value=str(11*l+7*s)
+    if len(value)>2:
+         value=value[-2:]
+    bit.append(value)
+print(bit)
+odd=[0]*10
+even=[0]*10
+for i in range(len(bit)):
+    msb=int(bit[i][0])
+    if(i%2==0):
+        even[msb]+=1
+    else:
+        odd[msb]+=1
+cunt=[0]*10
+print(odd)
+print(even)
+for j in range(10):
+    if even[j]<=1 and odd[j]<=1:
+        continue
+    cunt[j]+=int(pair(even[j])+pair(odd[j]))
+    cunt[j]=min(2,cunt[j])
+print(sum(cunt))
