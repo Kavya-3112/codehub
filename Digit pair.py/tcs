@@ -48,3 +48,32 @@ for j in range(10):
     cunt[j]+=int(pair(even[j])+pair(odd[j]))
     cunt[j]=min(2,cunt[j])
 print(sum(cunt))
+tcs'''''=digit pair
+def calculate_bit_score(num):
+    num_str = str(num)
+    largest_digit = max(num_str)
+    smallest_digit = min(num_str)
+    bit_score = (int(largest_digit) * 11 + int(smallest_digit) * 7) % 100
+    return bit_score
+
+def count_bit_pairs(bit_scores):
+    count = [0] * 10  # Initialize count for each significant digit (0-9)
+    result = 0
+
+    for score in bit_scores:
+        msd = score // 10  # Most significant digit
+        count[msd] += 1
+
+    for c in count:
+        result += (c * (c - 1)) // 2  # Calculate pairs using nC2 formula
+
+    return result
+
+# Read input
+N = int(input())
+numbers = list(map(int, input().split()))
+
+bit_scores = [calculate_bit_score(num) for num in numbers]
+result = count_bit_pairs(bit_scores)
+print(result)'''
+output 7
